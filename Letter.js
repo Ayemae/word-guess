@@ -2,17 +2,17 @@ function Letter(a) {
     this.placeholder = "_";
     this.secretLetter = a;
     this.guessCorrect = false;
-    this.guessMade = function() {
-        if (guessCorrect = true) {
-            console.log(this.secretLetter)
-        }else {
+    this.displayGame = function() {
+        if (this.guessCorrect === false) {
             console.log(this.placeholder)
+        }else {
+            console.log(this.secretLetter)
         }
     },
     this.checkForCorrect = function(userGuess) {
-        if (secretLetter === userGuess) {
-            guessCorrect = true;
-            this.guessMade();
+        if (this.secretLetter === userGuess) {
+            this.guessCorrect = true;
+            this.displayGame();
         }
     }
 }

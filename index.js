@@ -7,22 +7,36 @@ var animals = ["anaconda", "angelfish", "anglerfish", "bluejay", "cardinal", "ca
     "walrus", "whale", "wolf", "zebra"]
 
 
-var chooseWord = animals[Math.floor(Math.random() * animals.length)]
-var mysteryWord = chooseWord.split("");
-guessThisWord = new Word(mysteryWord);
 
 
 
-inquirer.prompt([
 
-    {
-        type: "input",
-        name: "guess",
-        message: "Choose a letter."
-    }
-]).then(function (user) {
-    console.log (guessThisWord.letters)
-    guessThisWord.checkForMatch(user.guess);
-    console.log("hey");
-})
+function startGame() {
 
+    var mysteryWord = "";
+    var chooseWord = animals[Math.floor(Math.random() * animals.length)]
+    mysteryWord = chooseWord.split("");
+    guessThisWord = new Word(mysteryWord);
+    guessThisWord.wordString();
+}
+
+
+function promptUserGuess () {
+    console.log("*************")
+    inquirer.prompt([
+
+        {
+            type: "input",
+            name: "guess",
+            message: "Choose a letter."
+        }
+    ]).then(function (user) {
+        guessThisWord.checkForMatch(user.guess);
+            promptUserGuess();
+            if (user.guess === "exit") {return}
+    })
+}
+
+
+startGame();
+promptUserGuess();

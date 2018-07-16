@@ -1,19 +1,22 @@
 var Letter = require("./Letter");
 
-function Word(mwArr) { 
+
+function Word(mwArr) {
     this.mysteryWord = "";
     this.letters = [];
-    this.wordString = function() {
+    this.gameOver = false;
+    this.wordString = function () {
         for (var i = 0; i < mwArr.length; i++) {
-            mwArr[i] = new Letter(mwArr[i]);
-            letters.push(mwArr[i])
+            (this.letters).push(new Letter(mwArr[i]));
         }
     },
-    this.checkForMatch = function(userGuess) {
-        for (var i = 0; i < letters.length; i++) {
-            letters[i].checkForCorrect(userGuess);
+        this.checkForMatch = function (userGuess) {
+            for (var i = 0; i < this.letters.length; i++) {
+                this.letters[i].checkForCorrect(userGuess);
+                this.letters[i].displayGame();
         }
     }
 }
+
 
 module.exports = Word;
