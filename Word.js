@@ -1,6 +1,7 @@
 var Letter = require("./Letter");
 
-function Word() {
+function Word() { 
+    this.mysteryWord = "";
     this.letters = [];
     this.wordString = function() {
         for (var i = 0; i < letters.length; i++) {

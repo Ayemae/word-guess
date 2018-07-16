@@ -7,9 +7,18 @@ var animals = ["anaconda", "angelfish", "anglerfish", "bluejay", "cardinal", "ca
 
  var userGuess = "";
 
- inquirer.prompt(["Choose a letter."]).then(answers => {
-    answers = userGuess;
-});
+ inquirer.prompt([
+
+    {
+      type: "input",
+      name: "guess",
+      message: "Choose a letter."
+    }
+]).then(function(user) {
+    if (user.guess === stuff){
+
+    }
+        })
 
  document.onkeyup = function (event) {
     var userGuess = event.key.toLowerCase();

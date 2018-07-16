@@ -1,11 +1,12 @@
 function Letter() {
+    this.placeholder = "_";
     this.secretLetter = "";
     this.guessCorrect = false;
     this.guess = function() {
-        if (secretLetter === userGuess) {
-
+        if (guessCorrect = true) {
+            console.log(this.secretLetter)
         }else {
-
+            console.log(this.placeholder)
         }
     },
     this.checkForCorrect = function(userGuess) {
