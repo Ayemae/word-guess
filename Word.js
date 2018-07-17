@@ -14,8 +14,15 @@ function Word(mwArr) {
             for (var i = 0; i < this.letters.length; i++) {
                 this.letters[i].checkForCorrect(userGuess);
                 this.letters[i].displayGame();
+            }
+            for (var i = 0; i < this.letters.length; i++) {
+                if (this.letters[i].guessCorrect === false) {
+                    return;
+                }
+            }
+            console.log("You win!")
+            this.gameOver = true;
         }
-    }
 }
 
 

@@ -6,8 +6,7 @@ var animals = ["anaconda", "angelfish", "anglerfish", "bluejay", "cardinal", "ca
     "pelican", "orangutan", "piranha", "pony", "rabbit", "salamander", "seal", "sloth", "tiger", "tortoise", "viper",
     "walrus", "whale", "wolf", "zebra"]
 
-
-
+var lettersGuessed = [];
 
 
 
@@ -17,26 +16,61 @@ function startGame() {
     var chooseWord = animals[Math.floor(Math.random() * animals.length)]
     mysteryWord = chooseWord.split("");
     guessThisWord = new Word(mysteryWord);
+    lettersGuessed = [];
     guessThisWord.wordString();
+    guessThisWord.checkForMatch();
+    promptUserGuess();
 }
 
 
-function promptUserGuess () {
-    console.log("*************")
-    inquirer.prompt([
+function promptUserGuess() {
+    if (guessThisWord.gameOver === true) {
+        promptPlayAgain();
+    }
+    else {
+        console.log("*************")
+        inquirer.prompt([
 
-        {
-            type: "input",
-            name: "guess",
-            message: "Choose a letter."
-        }
-    ]).then(function (user) {
-        guessThisWord.checkForMatch(user.guess);
-            promptUserGuess();
-            if (user.guess === "exit") {return}
-    })
+            {
+                type: "input",
+                name: "guess",
+                message: "Choose a letter."
+            }
+        ]).then(function (user) {
+            if ((user.guess).length > 1) {
+                console.log("One letter at a time, please.")
+                promptUserGuess();
+            }
+            else if (lettersGuessed.indexOf(user.guess) === -1) {
+                guessThisWord.checkForMatch(user.guess);
+                lettersGuessed.push(user.guess);
+                promptUserGuess();
+            } else {
+                console.log("You already guessed that letter.")
+                promptUserGuess();
+            }
+        })
+    }
 }
 
 
 startGame();
-promptUserGuess();
+
+function promptPlayAgain() {
+    inquirer.prompt([
+
+        {
+            type: "list",
+            name: "playAgain",
+            message: "Do you want to play again?",
+            choices: ["Yes", "No"]
+        }
+    ]).then(function (user) {
+        if (user.playAgain === "Yes") {
+            startGame();
+        }
+        else {
+            return;
+        }
+    })
+}

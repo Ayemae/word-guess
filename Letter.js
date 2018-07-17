@@ -12,7 +12,6 @@ function Letter(a) {
     this.checkForCorrect = function(userGuess) {
         if (this.secretLetter === userGuess) {
             this.guessCorrect = true;
-            this.displayGame();
         }
     }
 }
